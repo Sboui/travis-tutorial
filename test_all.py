@@ -1,3 +1,4 @@
+from__future__import division
 def test_division():
     assert 3/2 == 1.5
 def test_addition():
