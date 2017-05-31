@@ -2,30 +2,22 @@ language: python
 
 dist: trusty
 
-cache: pip
-
 sudo: required
 
 services:
   - docker
 
-
-script: 
-  - docker run -v $PWD:$PWD test-container  
-  
-python:
-  - 2.7
-  - 3.6
- 
 matrix:
   include:
-    - python: "2.7"
-        env: NUMPY_VERSION=1.7.1
-    - python: "3.6"
-        env: NUMPY_VERSION=1.7.1
-    - python: "3.6"
-        env: NUMPY_VERSION=1.12.1
-
+  - python: "2.7"
+    env: NUMPY_VERSION=1.7.1
+  - python: "3.6"
+    env: NUMPY_VERSION=1.7.1
+  - python: "3.6"
+    env: NUMPY_VERSION=1.12.1
 
 install:
- - docker build -t test-container --build-arg numpy_version=$NUMPY_VERSION .
+  - docker build -t test-container --build-arg numpy_version=$NUMPY_VERSION .
+
+script:
+- docker run -v $PWD:$PWD test-container /bin/bash -c "cd $PWD && pytest"
