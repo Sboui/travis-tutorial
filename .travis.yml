@@ -9,8 +9,12 @@ script:
 python:
   - 2.7
   - 3.6
-env:
-  - NUMPY_VERSION=1.7.1
-  - NUMPY_VERSION=1.12.1
+ 
+matrix:
+  include:
+  - python: "2.7"
+    env: TEST_SUITE=suite_2_7
+  - python: "3.6"
+    env: TEST_SUITE=suite_3_6
 
 install: pip install numpy==$NUMPY_VERSION
